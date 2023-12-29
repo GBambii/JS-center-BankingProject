@@ -2,7 +2,7 @@ export interface ICustomer{
     id : number,
     name: string,
     age: number,
-    role: string
+    score: number
 }
 export interface Iproduct{
     id: number,
@@ -22,6 +22,12 @@ export interface Iemployee{
     name: string,
     type: string,
     
+}
+export interface IClientBase{
+    id: number,
+    name: string,
+    type: string,
+    clientBase : ICustomer[]
 }
 export interface IClientBase{
     id: number,

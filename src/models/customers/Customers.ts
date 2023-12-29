@@ -4,12 +4,10 @@ import { ICustomer } from "../entities";
 
 
 const customerSchema = new Schema<ICustomer>({
-    id : number,
-    name: string,
-    age: number,
-    role: string
-    id :  {type: Number},
+    id : {type: Number},
     name: {type: String},
-    type: {type: String},
-    isRetired: {type: "Boolean"}
+    age: {type: Number},
+    score: {type: Number},
 })
+const Customer = model('Customer', customerSchema);
+export default Customer;

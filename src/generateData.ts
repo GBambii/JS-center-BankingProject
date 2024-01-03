@@ -1,18 +1,38 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import faker from 'faker';
+import * as dotenv from "dotenv";
+import Customer from './models/customers/Customers';
+import Account from './models/Account/Account';
+import Product from './models/Product/Product';
+import Loan from './models/Loan/Loan';
+import Employee from './models/employee/Employee';
+import ClientBase from './models/ClientBase/ClientBase';
+import Manager from './models/Manager/Manager';
+import Branch from './models/Branch/Branch';
+import Transaction from './models/Transaction/Transaction';
 
-  import Customer from './models/customers/Customers';
-  import Account from './models/Account/Account';
-  import Product from './models/Product/Product';
-  import Loan from './models/Loan/Loan';
-  import Employee from './models/employee/Employee';
-  import ClientBase from './models/ClientBase/ClientBase';
-  import Manager from './models/Manager/Manager';
-  import Branch from './models/Branch/Branch';
-  import Transaction from './models/Transaction/Transaction';
+  dotenv.config();
 
 // Conectar a la base de datos MongoDB
-mongoose.connect('mongodb://localhost:27017/your_database', { useNewUrlParser: true, useUnifiedTopology: true });
+const start = async () => {
+    try {
+      await mongoose.connect(process.env.MONGODB_URI!, { useUnifiedTopology: true });
+  
+      console.log('Connected to MongoDB');
+      
+      app.listen(PORT, () => console.log(`Server started on ${PORT}`));
+    } catch (error: any) {
+      console.error('Error starting the server:', error);
+  
+      if (error.name === 'MongoError') {
+        console.error('MongoDB Connection Error:', error.message);
+      }
+  
+      process.exit(1);
+    }
+  };
+  
+  start();
 
 
 // Generar datos ficticios y guardarlos en la base de datos
@@ -37,7 +57,7 @@ async function generateData() {
     // Generar préstamos ficticios
     const loans = Array.from({ length: 5 }, (_, index) => ({
       id: index + 1,
-      account: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      account: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
       amount: faker.random.number({ min: 1000, max: 10000 }),
       date: faker.date.past(),
     }));
@@ -47,8 +67,8 @@ async function generateData() {
       id: index + 1,
       name: faker.name.findName(),
       type: faker.name.jobType(),
-      branch: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
-      clientBase: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      branch: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      clientBase: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
     }));
 
     // Generar bases de clientes ficticias
@@ -56,7 +76,7 @@ async function generateData() {
       id: index + 1,
       name: faker.company.companyName(),
       type: faker.company.companySuffix(),
-      clients: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      clients: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
     }));
 
     // Generar gerentes ficticios
@@ -64,7 +84,7 @@ async function generateData() {
       id: index + 1,
       name: faker.name.findName(),
       age: faker.random.number({ min: 30, max: 60 }),
-      branch: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      branch: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
     }));
 
     // Generar sucursales ficticias
@@ -72,16 +92,16 @@ async function generateData() {
       id: index + 1,
       name: faker.company.companyName(),
       location: faker.address.city(),
-      manager: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      manager: Schema.Types.ObjectId(), // Generar un ObjectId aleatorio
     }));
 
     // Generar cuentas ficticias
     const accounts = Array.from({ length: 5 }, (_, index) => ({
       id: index + 1,
-      owner: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      owner: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
       type: faker.finance.accountType(),
-      transaction: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
-      loan: mongoose.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      transaction: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
+      loan: Schema.Types.ObjectId(),  // Generar un ObjectId aleatorio
     }));
 
     // Generar transacciones ficticias

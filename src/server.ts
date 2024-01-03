@@ -34,10 +34,10 @@ app.use('/api/manager', managerRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/transaction', transactionRoutes);
 
-// conection to MongoDB
+
 const start = async () => {
   try {
-    await mongoose.connect(process.env.DB_CONN_STRING!, { useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGODB_URI!, { useUnifiedTopology: true });
 
     console.log('Connected to MongoDB');
     
@@ -54,11 +54,6 @@ const start = async () => {
 };
 
 start();
-
-
-start();
-// Setting routes
-
-app.listen(PORT, () => {
-  console.log(`The server is online in the port: ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`The server is online in the port: ${PORT}`);
+// });

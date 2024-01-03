@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import Customers from '../models/customers/customers';
-
+import Customers from '../models/customers/Customers';
 class customerController {
     async getAllCustomers(_req: Request, res: Response) {
         try {
@@ -64,6 +63,4 @@ class customerController {
         }
     }
 }
-
-
 export default new customerController();

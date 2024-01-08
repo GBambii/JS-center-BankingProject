@@ -9,5 +9,5 @@ const accountSchema = new Schema<IAccount>({
   loan: { type: Schema.Types.ObjectId, ref: "Loan" },
 });
 
-const Account = model('Product', accountSchema);
+const Account = model('Account', accountSchema);
 export default Account;

@@ -7,5 +7,5 @@ const clientBaseSchema = new Schema<IClientBase>({
     type: {type: String},
     clients: {type: Schema.Types.ObjectId, ref: "Customer"}
 })
-const ClientBase = model('clientBase', clientBaseSchema);
+const ClientBase = model('ClientBase', clientBaseSchema);
 export default ClientBase;
